@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = require('./auth.json');
-var x = 0;
+var x = 16;
 
 client.on('ready', () => {
 	client.user.setStatus('online')
@@ -66,6 +66,7 @@ client.on('guildMemberAdd', member => {
 //1.8 meow counter
 client.on('message', message => {
 	if (message.content === 'meow') {
+		message.react('🐱');
 		x++;
 	} 
 });
