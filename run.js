@@ -67,7 +67,6 @@ client.on('guildMemberAdd', member => {
 //1.8 meow counter
 client.on('message', message => {
 	if (message.content === 'meow') {
-		message.react('🐱');
 		fs.writeFile("./meow.json", `{ "meow" : " ` + ++meow.meow + `" }` , (err) => console.error);
 	} 
 });
