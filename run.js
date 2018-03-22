@@ -33,7 +33,7 @@ client.on('message', message => {
 	} 
 });
 
-//No swearing
+//No swearing module in progress
 client.on('message', message => {
 	if (message.content === 'fuck') {
 		message.channel.send('No swearing in this server.')
