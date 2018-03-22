@@ -2,6 +2,7 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = require('./auth.json');
 var meow = require('./meow.json');
+var fs = require('fs');
 
 client.on('ready', () => {
 	client.user.setStatus('online')
@@ -67,7 +68,7 @@ client.on('guildMemberAdd', member => {
 client.on('message', message => {
 	if (message.content === 'meow') {
 		message.react('🐱');
-		meow.meow++;
+		fs.writeFile("./meow.json", `{ "meow" : " ` + ++meow.meow + `" }` , (err) => console.error);
 	} 
 });
 
