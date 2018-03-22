@@ -4,7 +4,7 @@ const token = require('./auth.json');
 
 client.on('ready', () => {
 	client.user.setStatus('online')
-	client.user.setGame('Pre-Alpha 4/5')
+	client.user.setGame('Pre-Alpha 5/6')
 		.then(console.log)
 		.catch(console.error);
 		console.log('Bot is running!');
@@ -14,6 +14,15 @@ client.on('ready', () => {
 client.on('message', message => {
 	if (message.content === 'p!ping') {
 		message.channel.send('pong');
+	}
+});
+
+//vote care
+client.on('message', message => {
+	if (message.content === 'p!vote') {
+		message.react('👍');
+		message.react('👎');
+		message.react('👐');
 	}
 });
 
