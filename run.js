@@ -28,9 +28,9 @@ client.on('message', message => {
 //1.3 vote care
 client.on('message', message => {
 	if (message.content === 'p!vote') {
-		message.react('ðŸ‘');
-		message.react('ðŸ‘Ž');
-		message.react('ðŸ‘');
+		message.react('👍');
+		message.react('👎');
+		message.react('👐');
 	}
 });
 
