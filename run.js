@@ -13,7 +13,7 @@ client.on('ready', () => {
 //1.1 help
 client.on('message', message => {
 	if (message.content === 'p!help') {
-		message.channel.send('**Basic** \n`p!owner`, `p!ping`, `p!help`, `hi bot`');
+		message.channel.send('**Basic** \n`p!owner`, `p!ping`, `p!help`, `hi bot`, `p!vote`');
 	}
 });
 	
