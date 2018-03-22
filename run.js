@@ -73,8 +73,7 @@ client.on('message', message => {
 //1.9 meow counter show
 client.on('message', message => {
 	if (message.content === 'p!meow') {
-	message.channel.send(x);
-	message.channel.send('Meows globaly said this uptime!');
+	message.channel.send("I have counted **"+ x +"** meows globaly!");
 	message.react('🐱');
 	} 
 });
