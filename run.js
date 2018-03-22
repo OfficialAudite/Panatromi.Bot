@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const token = 'token';
+const token = require('./auth.json');
 
 client.on('ready', () => {
 	console.log('I am ready!');
@@ -22,7 +22,7 @@ client.on('message', message => {
 
 //No swearing
 client.on('message', message => {
-	if (message.content === 'fuck') {
+	if (message.content === 'fuck, nigger, fitta') {
 		message.channel.send('No swearing in this server.')
 	} 
 });
@@ -30,7 +30,7 @@ client.on('message', message => {
 //bot hi
 client.on('message', message => {
 	if (message.content === 'hi bot') {
-		message.channel.send('Hi there', message.author)
+		message.channel.send('Hi there, I have not much to say right now. But I will feature A.I. later on. So you will be able to have a conversation with me!')
 	}
 });
 
@@ -43,4 +43,4 @@ client.on('guildMemberAdd', member => {
 });
 
 
-client.login(token);
+client.login(token.token);
