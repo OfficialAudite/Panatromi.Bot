@@ -1,10 +1,11 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const token = require('./auth.json');
+var x = 0;
 
 client.on('ready', () => {
 	client.user.setStatus('online')
-	client.user.setGame('Pre-Alpha 6/7')
+	client.user.setGame('Pre-Alpha 8/9 | p!help')
 		.then(console.log)
 		.catch(console.error);
 		console.log('Bot is running!');
@@ -13,7 +14,7 @@ client.on('ready', () => {
 //1.1 help
 client.on('message', message => {
 	if (message.content === 'p!help') {
-		message.channel.send('**Basic** \n`p!owner`, `p!ping`, `p!help`, `hi bot`, `p!vote`');
+		message.channel.send('**Basic** \n`p!owner`, `p!ping`, `p!help`, `hi bot`, `p!vote`, `p!meow`');
 	}
 });
 	
@@ -27,9 +28,9 @@ client.on('message', message => {
 //1.3 vote care
 client.on('message', message => {
 	if (message.content === 'p!vote') {
-		message.react('👍');
-		message.react('👎');
-		message.react('👐');
+		message.react('ðŸ‘');
+		message.react('ðŸ‘Ž');
+		message.react('ðŸ‘');
 	}
 });
 
@@ -62,5 +63,20 @@ client.on('guildMemberAdd', member => {
 	channel.send('Welcome to the server!');
 });
 
+//1.8 meow counter
+client.on('message', message => {
+	if (message.content === 'meow') {
+		x++;
+	} 
+});
+
+//1.9 meow counter show
+client.on('message', message => {
+	if (message.content === 'p!meow') {
+	message.channel.send(x);
+	message.channel.send('Meows globaly said this uptime!');
+	message.react('🐱');
+	} 
+});
 
 client.login(token.token);
