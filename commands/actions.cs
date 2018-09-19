@@ -11,9 +11,6 @@ namespace MyFirstBot
     public class Actions
     {
         private Random random = new Random();
-        public byte B { get; }
-        public byte R { get; }
-        public byte G { get; }
 
         [Command("kiss")]
         public async Task Kiss(CommandContext ctx)

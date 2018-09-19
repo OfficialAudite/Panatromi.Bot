@@ -29,9 +29,7 @@ namespace MyFirstBot
 
             discord.MessageCreated += async e =>
             {
-                await discord.UpdateStatusAsync(new DiscordGame("Under Developerment"));
-                if (e.Message.Content.ToLower().StartsWith(config.prefix + "ping"))
-                    await e.Message.RespondAsync("pong!");
+                await discord.UpdateStatusAsync(new DiscordGame("Under Developerment in C#"));
             };
 
             commands = discord.UseCommandsNext(new CommandsNextConfiguration
