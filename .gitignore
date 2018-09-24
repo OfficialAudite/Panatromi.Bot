@@ -1,0 +1,5 @@
+configs/config.cs
+bin/
+DiscordBot.csproj
+obj/
+configs/config.cs

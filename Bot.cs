@@ -34,12 +34,19 @@ namespace MyFirstBot
 
             commands = discord.UseCommandsNext(new CommandsNextConfiguration
             {
+                EnableMentionPrefix = true,
+                EnableDms = true,
+                CaseSensitive = false,
                 StringPrefix = config.prefix
             });
+
+            runtimeconfig.StartTime = DateTime.Now;
 
             //Commands List
             commands.RegisterCommands<General>();
             commands.RegisterCommands<Actions>();
+            commands.RegisterCommands<Settings>();
+            commands.RegisterCommands<Admin>();
             // ----------- 
 
             await discord.ConnectAsync();
