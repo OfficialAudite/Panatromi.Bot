@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -17,6 +18,7 @@ namespace MyFirstBot
     public class General
     {
         private static readonly Random rand = new Random();
+        private Random random = new Random();
 
         [Command("hi")]
         public async Task Hi(CommandContext ctx)
@@ -29,14 +31,23 @@ namespace MyFirstBot
         public async Task Ping(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
+
             byte myByte = (byte)rand.Next(0, 255);
             byte myByte2 = (byte)rand.Next(0, 255);
             byte myByte3 = (byte)rand.Next(0, 255);
+
+            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "ping.txt");
+            int lineCount = lines.Length;
+            int randomLineNumber = random.Next(0, lineCount);
+            string link = lines[randomLineNumber];
+
             var emoji = DiscordEmoji.FromName(ctx.Client, ":ping_pong:");
+
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
-                Description = "Request took " + ctx.Client.Ping + "ms",
                 Title = "Pong " + emoji,
+                Description = "Request took " + ctx.Client.Ping + "ms",
+                ImageUrl = link,
                 Color = new DiscordColor(myByte, myByte2, myByte3)
             };
             await ctx.RespondAsync("", embed: embed);

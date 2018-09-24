@@ -238,7 +238,6 @@ namespace MyFirstBot
             await ctx.RespondAsync("", embed: embed);
         }
 
-        [RequireOwner]
         [Command("woah")]
         [Description("Slap action, [prefix]slap @user")]
         [Hidden]
@@ -251,12 +250,33 @@ namespace MyFirstBot
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
-                ImageUrl = "https://media.giphy.com/media/47yoW7CSpldOVkGBMt/giphy.gif",
+                ImageUrl = "https://panatromi.leakoni.net/none1.gif",
                 Color = new DiscordColor(myByte, myByte2, myByte3)
             };
 
             await ctx.RespondAsync("", embed: embed);
+            await ctx.Message.DeleteAsync();
+        }
+
+        [Command("life")]
+        [Description("Life In Nutshell")]
+        [Hidden]
+        public async Task Life(CommandContext ctx)
+        {
+            await ctx.TriggerTypingAsync();
+            byte myByte = (byte)rand.Next(0, 255);
+            byte myByte2 = (byte)rand.Next(0, 255);
+            byte myByte3 = (byte)rand.Next(0, 255);
+
+            DiscordEmbed embed = new DiscordEmbedBuilder()
+            {
+                Title = "Life in a nutshell...",
+                ImageUrl = "https://cdn.discordapp.com/attachments/456353024529399809/493876998649806849/none_Large.gif",
+                Color = new DiscordColor(myByte, myByte2, myByte3)
+            };
+
+            await ctx.RespondAsync("", embed: embed);
+            await ctx.Message.DeleteAsync();
         }
     }
-
 }
