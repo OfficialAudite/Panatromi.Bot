@@ -1,5 +1,5 @@
-configs/config.cs
-bin/
-DiscordBot.csproj
-obj/
-configs/config.cs
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/bin/Debug/netcoreapp2.0/configs/config.cs
