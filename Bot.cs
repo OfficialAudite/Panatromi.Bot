@@ -29,7 +29,7 @@ namespace MyFirstBot
 
             discord.MessageCreated += async e =>
             {
-                await discord.UpdateStatusAsync(new DiscordGame("Under Developerment in C#"));
+                await discord.UpdateStatusAsync(new DiscordGame(runtimeconfig.ingame));
             };
 
             commands = discord.UseCommandsNext(new CommandsNextConfiguration
@@ -45,8 +45,8 @@ namespace MyFirstBot
             //Commands List
             commands.RegisterCommands<General>();
             commands.RegisterCommands<Actions>();
-            commands.RegisterCommands<Settings>();
             commands.RegisterCommands<Admin>();
+            commands.RegisterCommands<Economy>();
             // ----------- 
 
             await discord.ConnectAsync();

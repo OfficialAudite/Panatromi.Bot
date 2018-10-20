@@ -11,20 +11,33 @@ namespace MyFirstBot
     public class Actions
     {
         private static readonly Random rand = new Random();
+        private static readonly Random randoms = new Random();
+
+        public DiscordColor ColorGenerator()
+        {
+            byte r = (byte)rand.Next(0, 255);
+            byte g = (byte)rand.Next(0, 255);
+            byte b = (byte)rand.Next(0, 255);
+            return new DiscordColor(r, g, b);
+        }
+
+        public string GetActionImage(string name)
+        {
+            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + name + ".txt");
+            int randomLineNumber = randoms.Next(0, lines.Length);
+            return lines[randomLineNumber];
+        }
 
         [Command("fbi")]
         public async Task Hi(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " sends FBI on " + ctx.RawArgumentString,
                 Title = "FBI OPEN UP!",
                 ImageUrl = "https://media1.tenor.com/images/93d11bc59526ce49f60766f0045d819b/tenor.gif?itemid=11500735",
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -37,19 +50,12 @@ namespace MyFirstBot
         public async Task Kiss(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "kiss.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " kisses " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("kiss"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -60,19 +66,12 @@ namespace MyFirstBot
         public async Task Bite(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "bite.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " bites " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("bite"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -83,19 +82,12 @@ namespace MyFirstBot
         public async Task Cuddle(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "cuddle.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " cuddles with " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("cuddle"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -106,19 +98,12 @@ namespace MyFirstBot
         public async Task Hug(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "hug.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " hugs " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("hug"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -129,19 +114,12 @@ namespace MyFirstBot
         public async Task Mad(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "mad.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " is mad at " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("mad"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -152,19 +130,12 @@ namespace MyFirstBot
         public async Task Pat(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "pat.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " pats " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("pat"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -175,18 +146,11 @@ namespace MyFirstBot
         public async Task Pout(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "pout.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("pout"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -197,19 +161,12 @@ namespace MyFirstBot
         public async Task Punch(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "punch.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " punches " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("punch"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -220,19 +177,12 @@ namespace MyFirstBot
         public async Task Slap(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
-            string[] lines = File.ReadAllLines(runtimeconfig.actionspath + "slap.txt");
-            int lineCount = lines.Length;
-            int randomLineNumber = random.Next(0, lineCount);
-            string link = lines[randomLineNumber];
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Description = ctx.User.Mention + " slaps " + ctx.RawArgumentString,
-                ImageUrl = link,
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                ImageUrl = GetActionImage("slap"),
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -244,14 +194,11 @@ namespace MyFirstBot
         public async Task Woah(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 ImageUrl = "https://panatromi.leakoni.net/none1.gif",
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);
@@ -264,15 +211,12 @@ namespace MyFirstBot
         public async Task Life(CommandContext ctx)
         {
             await ctx.TriggerTypingAsync();
-            byte myByte = (byte)rand.Next(0, 255);
-            byte myByte2 = (byte)rand.Next(0, 255);
-            byte myByte3 = (byte)rand.Next(0, 255);
 
             DiscordEmbed embed = new DiscordEmbedBuilder()
             {
                 Title = "Life in a nutshell...",
                 ImageUrl = "https://cdn.discordapp.com/attachments/456353024529399809/493876998649806849/none_Large.gif",
-                Color = new DiscordColor(myByte, myByte2, myByte3)
+                Color = ColorGenerator()
             };
 
             await ctx.RespondAsync("", embed: embed);

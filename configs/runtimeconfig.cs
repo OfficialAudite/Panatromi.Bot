@@ -4,15 +4,16 @@ using System.Text;
 
 namespace DiscordBot.configs
 {
-    class runtimeconfig
+    partial class runtimeconfig
     {
         // GENERAL SETTINGS
-        public static readonly string version = "0.1.2";
+        public static readonly string version = "0.1.2.1";
         public static readonly string programmers = "Syx, bakk, Cobly, \nMartinho23";
         public static readonly string designers = "Twisted";
         public static readonly string language = "English";
         public static readonly string starteddevdate = "09-19-2018";
         public static readonly string donators = "NULL";
+        public static readonly string ingame = "Under Developerment in C#";
 
         // PATHS
         public static readonly string actionspath = @"files\actions\";
