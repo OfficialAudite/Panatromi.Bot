@@ -24,7 +24,6 @@ namespace MyFirstBot
             return new DiscordColor(r, g, b);
         }
 
-
         string footer = " ";
 
         public void AddUser(string userId, int money = 100)
@@ -77,6 +76,7 @@ namespace MyFirstBot
                 else
                 {
                     AddUser(ctx.User.Id.ToString());
+                    await profile(ctx);
                 }
             }
         }
@@ -127,7 +127,6 @@ namespace MyFirstBot
                 }
 
             }
-
             await ctx.RespondAsync("");
         }
 
@@ -314,7 +313,26 @@ namespace MyFirstBot
                 Color = ColorGenerator()
             };
 
+            bool takeMoneySucceeded = TakeMoney(ctx.User.Id.ToString(), int.Parse(amount));
+            if (!takeMoneySucceeded)
+            {
+
+                DiscordEmbed failed = new DiscordEmbedBuilder()
+                {
+                    Title = "💶 Coin Flip",
+                    Description = "Failed. Are you sure you have enough credits?",
+                    Color = ColorGenerator()
+                };
+
+                await ctx.RespondAsync("", embed: failed);
+                return;
+            }
+
             var message = await ctx.RespondAsync("", embed: embed);
+
+            int delayrandom = new Random().Next(1000, 3000);
+            await Task.Delay(delayrandom);
+
             string title = "You lost.";
 
             int randomNum = new Random().Next(1, 5000);
@@ -324,46 +342,48 @@ namespace MyFirstBot
 
                 var resultEmbed = new DiscordEmbedBuilder()
                 {
-                    Title = "Side! Your bet will be multiplied by 50",
+                    Title = "💶 Side! Your bet will be multiplied by 50",
                     ImageUrl = "http://backup.leakoni.net/844WOLwn2Gyavl0/spin.gif",
                     Color = ColorGenerator()
                 };
-      
-        message.ModifyAsync((Optional<DiscordEmbed>)resultEmbed);
+
+                await message.ModifyAsync("", resultEmbed.Build());
+                await Balance(ctx);
             }
             else if (randomNum < 2500)
             {
-                if (face == "h")
+                if (face == "h" || face == "heads" || face == "head")
                 {
-                    title = "You win!";
-                  GiveMoney(ctx.User.Id.ToString(), int.Parse(amount) * 2);
+                    title = "You won " + amount.ToString() + " credits !";
+                    GiveMoney(ctx.User.Id.ToString(), int.Parse(amount) * 2);
+                };
+                var resultEmbed = new DiscordEmbedBuilder()
+                {
+                    Title = "💶 Heads! " + title,
+                    ImageUrl = "http://backup.leakoni.net/nQOcDM6zSO2hY3M/head.png",
+                    Color = ColorGenerator()
+                };
+
+                await message.ModifyAsync("", resultEmbed.Build());
+                await Balance(ctx);
+            }
+            else
+            {
+                if (face == "t" || face == "tails" || face == "tail")
+                {
+                    title = "You won " + amount.ToString() + " credits !";
+                    GiveMoney(ctx.User.Id.ToString(), int.Parse(amount) * 2);
                 }
 
                 var resultEmbed = new DiscordEmbedBuilder()
                 {
-                    Title = "Heads! " + title,
-                    ImageUrl = "link",
+                    Title = "💶 Tails! " + title,
+                    ImageUrl = "http://backup.leakoni.net/1ZXs7G406V69fV9/tail.png",
                     Color = ColorGenerator()
                 };
-      
-                message.ModifyAsync(resultEmbed);
-                    }
-                else
-                {
-                if (face == "t")
-                {
-                  title = "You win!";
-                  GiveMoney(ctx.User.Id.ToString(), int.Parse(amount) * 2);
-                }
 
-                var resultEmbed = new DiscordEmbedBuilder()
-                {
-                    Title = "Tails! " + title,
-                    ImageUrl = "link",
-                    Color = ColorGenerator()
-                };
-      
-        message.ModifyAsync(resultEmbed);
+                await message.ModifyAsync("", resultEmbed.Build());
+                await Balance(ctx);
             }
         }
 
