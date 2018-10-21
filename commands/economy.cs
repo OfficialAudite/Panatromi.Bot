@@ -287,8 +287,6 @@ namespace MyFirstBot
                     {
                         return false;
                     }
-
-                    db.SaveChanges();
                 }
                 else
                 {
@@ -297,6 +295,13 @@ namespace MyFirstBot
                 }
             }
 
+            return true;
+        }
+
+        public bool IsNumerical(string input)
+        {
+            foreach (var c in input)
+                if (c < 48 || c > 57) { return false; }
             return true;
         }
 
@@ -312,6 +317,33 @@ namespace MyFirstBot
                 ImageUrl = "http://backup.leakoni.net/844WOLwn2Gyavl0/spin.gif",
                 Color = ColorGenerator()
             };
+
+            if (face != "t" && face != "tail" && face != "tails" && face != "h" && face != "head" && face != "heads")
+            {
+
+                DiscordEmbed error = new DiscordEmbedBuilder()
+                {
+                    Title = "💶 Coin Flip",
+                    Description = "Incorrect input!",
+                    Color = ColorGenerator()
+                };
+
+                await ctx.RespondAsync("", embed: error);
+                return;
+            }
+
+            if (!IsNumerical(amount))
+            {
+                DiscordEmbed error1 = new DiscordEmbedBuilder()
+                {
+                    Title = "💶 Coin Flip",
+                    Description = "Amount should be int'able or pana going to ignore you...",
+                    Color = ColorGenerator()
+                };
+
+                await ctx.RespondAsync("", embed: error1);
+                return;
+            }
 
             bool takeMoneySucceeded = TakeMoney(ctx.User.Id.ToString(), int.Parse(amount));
             if (!takeMoneySucceeded)
@@ -330,7 +362,7 @@ namespace MyFirstBot
 
             var message = await ctx.RespondAsync("", embed: embed);
 
-            int delayrandom = new Random().Next(1000, 3000);
+            int delayrandom = new Random().Next(1000, 4000);
             await Task.Delay(delayrandom);
 
             string title = "You lost.";
@@ -343,6 +375,7 @@ namespace MyFirstBot
                 var resultEmbed = new DiscordEmbedBuilder()
                 {
                     Title = "💶 Side! Your bet will be multiplied by 50",
+                    Description = ctx.User.Mention,
                     ImageUrl = "http://backup.leakoni.net/844WOLwn2Gyavl0/spin.gif",
                     Color = ColorGenerator()
                 };
@@ -360,6 +393,7 @@ namespace MyFirstBot
                 var resultEmbed = new DiscordEmbedBuilder()
                 {
                     Title = "💶 Heads! " + title,
+                    Description = ctx.User.Mention,
                     ImageUrl = "http://backup.leakoni.net/nQOcDM6zSO2hY3M/head.png",
                     Color = ColorGenerator()
                 };
@@ -378,6 +412,7 @@ namespace MyFirstBot
                 var resultEmbed = new DiscordEmbedBuilder()
                 {
                     Title = "💶 Tails! " + title,
+                    Description = ctx.User.Mention,
                     ImageUrl = "http://backup.leakoni.net/1ZXs7G406V69fV9/tail.png",
                     Color = ColorGenerator()
                 };
